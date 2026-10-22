@@ -5,10 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <meta name="theme-color" content="#0c1726">
 <meta name="description" content="195か国を地図とリストで調べる双方向・オフライン世界地図帳">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./assets/icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>世界195か国 インタラクティブ地図帳</title>
 <style>
 :root{color-scheme:dark;--bg:#091421;--panel:#101e2e;--panel2:#15273b;--line:#284057;--text:#f2f7fa;--muted:#a7bacb;--accent:#62e1b8;--ocean:#0b2031;--land:#365369;--landstroke:#23384e;--shadow:0 15px 35px #040e19a0;--radius:15px}
@@ -22,7 +18,7 @@ button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus
 .mapbar{min-height:55px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line)}.map-title{font-size:14px;font-weight:750}.map-subtitle{font-size:10.5px;color:var(--muted);margin-top:3px}.controls{display:flex;gap:6px;align-items:center}.ctrl{display:flex;align-items:center;justify-content:center;min-width:35px;height:34px;background:#1b354b;color:#e4f6f7;border:1px solid #385066;border-radius:9px;font-size:18px;padding:0 10px}.ctrl:hover{background:#2a5067}.ctrl.reset{font-size:12px;min-width:70px}
 #mapViewport{flex:1;min-height:0;position:relative;background:radial-gradient(ellipse at 45% 45%,#153850,#081d2d 95%);touch-action:none;overflow:hidden;user-select:none;cursor:grab}#mapViewport.dragging{cursor:grabbing}
 #worldMap{height:100%;width:100%;display:block;touch-action:none}.graticule{stroke:#325066;stroke-width:.62;opacity:.55;vector-effect:non-scaling-stroke}.country{fill:var(--land);stroke:var(--landstroke);stroke-width:.7;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .12s}.country:hover{fill:#5c8899}.country.selected{fill:#4be0b1;stroke:#f2fff0;stroke-width:1.5;filter:drop-shadow(0px 0px 4px #21eab282)}.other-territory{fill:#314456;stroke:#253c4d;stroke-width:.75;vector-effect:non-scaling-stroke;cursor:help}.other-territory:hover{fill:#58687a}
-.marker .halo{fill:transparent;stroke:none;cursor:pointer}.marker .dot{fill:#e7c575;stroke:#f6f0d4;stroke-width:1;vector-effect:non-scaling-stroke;pointer-events:none}.marker.selected .dot{fill:#60f5c0;stroke:#fff;stroke-width:1.6}.marker.selected .pulse{fill:none;stroke:#89ffe5;stroke-width:1.2;vector-effect:non-scaling-stroke;opacity:.85;pointer-events:none}.marker{cursor:pointer}
+.marker .pulse{fill:none;stroke:none;pointer-events:none}.marker .halo{fill:transparent;stroke:none;cursor:pointer}.marker .dot{fill:#e7c575;stroke:#f6f0d4;stroke-width:1;vector-effect:non-scaling-stroke;pointer-events:none}.marker.selected .dot{fill:#60f5c0;stroke:#fff;stroke-width:1.6}.marker.selected .pulse{fill:none;stroke:#89ffe5;stroke-width:1.2;vector-effect:non-scaling-stroke;opacity:.85;pointer-events:none}.marker{cursor:pointer}
 .map-help{position:absolute;left:12px;bottom:12px;color:#d0e2ea;font-size:11px;background:#0d2336db;border:1px solid #35556b;border-radius:8px;padding:7px 9px;pointer-events:none}.map-legend{display:flex;gap:12px}.legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;background:#e7c575}.legend-selected{background:#60f5c0}
 .hover{display:none;position:absolute;z-index:3;left:0;top:0;pointer-events:none;padding:7px 10px;border:1px solid #527189;border-radius:7px;background:#071420ed;color:white;font-size:12px;box-shadow:var(--shadow);white-space:nowrap}
 .infobox{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 18px;flex-shrink:0;min-height:135px;display:flex;flex-direction:column;justify-content:center;gap:7px}.info-top{display:flex;align-items:center;gap:9px;min-height:19px}.eyebrow{font-size:11px;color:#93c6c8;font-weight:700;letter-spacing:.03em}.info-title{font-size:21px;font-weight:780;margin:0;line-height:1.35}.info-description{color:#c4d3df;font-size:13px;line-height:1.65;margin:0}.info-hint{color:#7f9db2;font-size:11px;margin:0}
@@ -32,6 +28,64 @@ button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus
 @media(max-width:800px){.sitehead{height:60px;padding:8px 12px}.brand-icon{width:38px;height:38px;border-radius:10px;font-size:21px}.brand h1{font-size:15px}.brand p{font-size:10px}.head-stat{padding:6px 8px;font-size:10px}.layout{grid-template-columns:1fr;grid-template-rows:minmax(0,43%) minmax(0,57%);gap:8px;padding:8px}.map-column{gap:7px}.map-card{flex:1;min-height:0}.mapbar{min-height:43px;padding:5px 9px}.map-title{font-size:12px}.map-subtitle{display:none}.ctrl{min-width:30px;height:30px;padding:0 8px}.ctrl.reset{min-width:60px;font-size:11px}.map-help{font-size:9px;padding:5px 7px;left:7px;bottom:6px}.infobox{padding:9px 12px;min-height:78px;gap:3px}.info-title{font-size:17px}.info-description{font-size:11px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.info-top{min-height:14px}.eyebrow{font-size:9px}.info-hint{display:none}.side-top{padding:9px 10px 8px}.side-heading{margin-bottom:7px}.side-heading h2{font-size:13px}.searchbox{height:37px}.searchbox input{font-size:13px}.filters{flex-wrap:nowrap;overflow-x:auto;gap:5px;padding-bottom:2px;margin-top:7px}.filter{font-size:10px;padding:5px 8px}.region-title{margin:6px 0 4px}.country-row{padding:8px 7px;margin:2px 0}.footer-note{display:none}#countryList{padding:5px 8px 15px}}
 @media(max-width:800px) and (max-height:670px){.layout{grid-template-rows:43% 57%}.map-help{display:none}.infobox{min-height:65px}.info-description{-webkit-line-clamp:1}.brand p{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* v2: readable country details, large touch map and full-screen map mode. */
+.row-desc{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.55;font-size:11.5px;color:#afc2d1;overflow-wrap:anywhere}
+.row-title{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.4}
+.country-row{align-items:flex-start}
+.row-arrow{align-self:center}
+.info-description{overflow:visible;text-overflow:clip;white-space:normal;overflow-wrap:anywhere}
+.ctrl.fullscreen{font-size:11px;min-width:76px;padding:0 8px;font-weight:700;letter-spacing:0}
+#jumpToList{display:none;margin-left:auto;border:1px solid #447c70;background:#174e48;color:#adfce1;border-radius:8px;padding:7px 10px;font-weight:700;font-size:12px}
+.map-expanded{overflow:hidden!important}
+.map-expanded .map-column{position:fixed;inset:0;z-index:100;background:var(--bg);padding:max(env(safe-area-inset-top),8px) max(env(safe-area-inset-right),8px) max(env(safe-area-inset-bottom),8px) max(env(safe-area-inset-left),8px);display:flex;gap:8px;min-height:0;width:auto;max-height:100dvh}
+.map-expanded .map-card{flex:1!important;height:auto!important;min-height:0!important}
+.map-expanded .infobox{flex-shrink:0;min-height:0;max-height:35dvh;overflow-y:auto;overscroll-behavior:contain}
+.map-expanded #jumpToList{display:inline-flex}
+.map-expanded .map-help{display:none}
+.map-expanded .mapbar{flex-shrink:0}
+.map-expanded #mapViewport{min-height:0}
+@media(max-width:800px){
+ body{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+ .app{height:auto;min-height:100dvh;overflow:visible}
+ .sitehead{height:auto;min-height:61px}
+ .layout{display:flex;flex-direction:column;grid-template-columns:none;grid-template-rows:none;gap:10px;padding:10px;min-height:0;flex:initial}
+ .map-column{height:auto;min-height:0;flex:none;gap:9px}
+ .map-card{height:clamp(340px,49dvh,580px);flex:none;min-height:0}
+ .mapbar{min-height:48px;padding:6px 9px}
+ .map-title{font-size:14px}
+ .ctrl{height:34px;min-width:34px;padding:0 8px}
+ .ctrl.reset{min-width:64px}
+ .ctrl.fullscreen{min-width:76px;font-size:11px}
+ .map-help{font-size:10px;padding:6px 8px;left:8px;bottom:8px}
+ .infobox{height:auto;min-height:0;flex:none;padding:12px 14px;gap:7px}
+ .info-top{min-height:20px}
+ .eyebrow{font-size:11px}
+ .info-title{font-size:21px}
+ .info-description{font-size:13px;line-height:1.65;display:block;-webkit-line-clamp:unset;-webkit-box-orient:initial;overflow:visible;white-space:normal}
+ .info-hint{display:block;font-size:10px;line-height:1.5}
+ .sidebar{height:clamp(430px,65dvh,700px);flex:none;min-height:0;overflow:hidden}
+ #countryList{flex:1;overflow-y:auto;min-height:0;padding:7px 9px 20px}
+ .side-top{padding:12px 11px 11px}
+ .side-heading h2{font-size:15px}
+ .searchbox{height:42px}
+ .row-desc{font-size:12px;line-height:1.5;margin-top:4px;white-space:normal;overflow:visible;text-overflow:clip}
+ .country-row{padding:11px 9px;margin:3px 0 7px;gap:11px}
+ .row-title{font-size:14px}
+ .row-num{font-size:12px;padding-top:1px}
+ .region-title{font-size:13px;padding:9px 10px}
+ .map-card{scroll-margin-top:8px}
+ .map-expanded .map-column{height:100dvh}
+ .map-expanded .map-card{height:auto}
+ .map-expanded .infobox{padding:12px 14px;max-height:40dvh}
+}
+@media(max-width:800px) and (max-height:670px){
+ .info-description{display:block;-webkit-line-clamp:unset;overflow:visible}
+ .map-card{height:max(300px,55dvh)}
+ .map-expanded .map-card{height:auto}
+}
+@media(max-width:370px){.head-stat{font-size:9px;padding:5px 6px}.ctrl{padding:0 5px;min-width:30px}.ctrl.reset{min-width:58px}.ctrl.fullscreen{min-width:67px}.mapbar{padding:6px}}
+
 </style>
 </head>
 <body>
@@ -44,13 +98,13 @@ button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus
     <section class="map-column" aria-label="世界地図と国の説明">
       <div class="map-card">
         <div class="mapbar"><div><div class="map-title">世界地図</div><div class="map-subtitle">国をクリック・タップして、右のリストに移動</div></div>
-          <div class="controls"><button class="ctrl" id="zoomIn" aria-label="地図を拡大" title="拡大">＋</button><button class="ctrl" id="zoomOut" aria-label="地図を縮小" title="縮小">−</button><button class="ctrl reset" id="resetMap" title="世界全体に戻る">全体表示</button></div>
+          <div class="controls"><button class="ctrl" id="zoomIn" aria-label="地図を拡大" title="拡大">＋</button><button class="ctrl" id="zoomOut" aria-label="地図を縮小" title="縮小">−</button><button class="ctrl reset" id="resetMap" title="世界全体に戻る">全体表示</button><button class="ctrl fullscreen" id="expandMap" type="button" aria-pressed="false" title="地図を大きく表示">⛶ 拡大</button></div>
         </div>
         <div id="mapViewport"><svg id="worldMap" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="国を選択できる世界地図" preserveAspectRatio="xMidYMid meet"><g id="graticule"></g><g id="countryShapes"></g><g id="countryMarkers"></g></svg>
            <div id="hoverLabel" class="hover"></div><div class="map-help"><span class="legend-dot"></span>小さな国は●で表示　<span class="legend-dot legend-selected"></span>選択中 <span class="desktop-help">｜ ドラッグで移動・ホイールで拡大</span></div>
         </div>
       </div>
-      <section class="infobox" aria-live="polite"><div class="info-top"><span class="eyebrow" id="infoRegion">国を選択してください</span></div><h2 class="info-title" id="infoName">地図と国名リストが連動します</h2><p class="info-description" id="infoDesc">リストを押すと該当国を拡大表示。地図の国や黄色の丸を押すと、リストの該当行に移動します。</p><p class="info-hint" id="infoHint">※ 小さな国は位置マーカーで表示。国境線は学習用の概略図です（係争地域は簡略表示）。</p></section>
+      <section class="infobox" aria-live="polite"><div class="info-top"><span class="eyebrow" id="infoRegion">国を選択してください</span><button id="jumpToList" type="button" disabled>一覧へ ↓</button></div><h2 class="info-title" id="infoName">地図と国名リストが連動します</h2><p class="info-description" id="infoDesc">リストを押すと該当国を拡大表示。地図の国や黄色の丸を押すと、リストの該当行に移動します。</p><p class="info-hint" id="infoHint">※ 小さな国は位置マーカーで表示。国境線は学習用の概略図です（係争地域は簡略表示）。</p></section>
     </section>
     <aside class="sidebar" aria-label="195か国一覧"><div class="side-top"><div class="side-heading"><h2>国名・特徴から探す</h2><span id="matchCount" class="count">195 / 195か国</span></div>
       <label class="searchbox"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91a9bb" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span class="sr-only">国名や特徴を検索</span><input type="search" id="search" placeholder="日本、ヨーロッパ、砂漠、JPN など" autocomplete="off"/></label>
@@ -71,7 +125,8 @@ const list=document.getElementById('countryList'), search=document.getElementByI
 const htmlSafe=s=>String(s).replace(/[&<>"']/g,t=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[t]));
 const regions=['すべて','アジア','ヨーロッパ','アフリカ','南北アメリカ','オセアニア'];
 let activeRegion='すべて',selected=null,query='',lastMoved=0,hoverTimer=0;
-const shapesByCode=new Map(),markersByCode=new Map(), countryRows=new Map();
+const expandMapButton=document.getElementById('expandMap'),jumpToListButton=document.getElementById('jumpToList');
+const shapesByCode=new Map(),markersByCode=new Map(),markerCoords=new Map(),countryRows=new Map();
 const vb={x:0,y:0,w:1200,h:560};
 const geoToMap=([lon,lat])=>[(lon+180)/360*1200,(84-lat)/168*560];
 function el(tag,attrs={}){const n=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,String(v));return n;}
@@ -91,7 +146,7 @@ function draw(){
   const [x,y]=geoToMap(c.lonlat);
   const g=el('g',{class:'marker',transform:`translate(${x.toFixed(2)} ${y.toFixed(2)})`});g.dataset.iso=c.iso;g.setAttribute('aria-label',c.name);g.setAttribute('role','button');g.setAttribute('tabindex','0');
   g.append(el('circle',{class:'pulse',r:8}),el('circle',{class:'halo',r:11}),el('circle',{class:'dot',r:3.4}));
-  const title=el('title');title.textContent=c.name;g.appendChild(title);markerLayer.appendChild(g);markersByCode.set(c.iso,g);
+  const title=el('title');title.textContent=c.name;g.appendChild(title);markerLayer.appendChild(g);markersByCode.set(c.iso,g);markerCoords.set(c.iso,[x,y]);
  }
 }
 function renderFilters(){filters.innerHTML='';for(const r of regions){const b=document.createElement('button');b.className='filter';b.textContent=r;b.setAttribute('aria-pressed',r===activeRegion?'true':'false');b.onclick=()=>{activeRegion=r;renderFilters();renderList();};filters.appendChild(b)}}
@@ -115,6 +170,13 @@ function setView(x,y,w){
  w=Math.max(42,Math.min(1200,w));let h=w*560/1200;
  x=Math.max(0,Math.min(1200-w,x));y=Math.max(0,Math.min(560-h,y));
  Object.assign(vb,{x,y,w,h});svg.setAttribute('viewBox',`${x.toFixed(2)} ${y.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)}`);
+ updateMarkerSizes();
+}
+// Keep island/microstate markers tappable without turning into huge discs after zooming.
+function updateMarkerSizes(){
+ const px=mapWrap.clientWidth||390;
+ const scale=1.12*vb.w/px;
+ for(const [code,g] of markersByCode){const [x,y]=markerCoords.get(code);g.setAttribute('transform',`translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${scale.toFixed(4)})`)}
 }
 function focusCountry(c){
  const [cx,cy]=geoToMap(c.lonlat);let width=132;
@@ -133,6 +195,7 @@ function selectCountry(iso,from){
  document.getElementById('infoRegion').textContent=`No.${c.id} ／ ${c.region}`;
  document.getElementById('infoName').textContent=c.name;
  document.getElementById('infoDesc').textContent=c.desc;
+ jumpToListButton.disabled=false;
  document.getElementById('infoHint').textContent=c.marker?'● 黄色い位置マーカーがある国です。正確な国境の細部は省略しています。':'地図上の緑色の部分が選択した国です。';
  focusCountry(c);
  if(from==='map'){
@@ -141,9 +204,15 @@ function selectCountry(iso,from){
    activeRegion='すべて';search.value='';query='';renderFilters();renderList();
   }
  }
- const row=countryRows.get(iso);if(row){row.classList.add('is-active');if(from==='map'){
-  requestAnimationFrame(()=>row.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center',inline:'nearest'}));
+ const row=countryRows.get(iso);
+ if(row){row.classList.add('is-active');if(from==='map'&&!document.body.classList.contains('map-expanded')){
+   // Normal mode: jump from the map to the corresponding list item.
+   requestAnimationFrame(()=>row.scrollIntoView({behavior:scrollBehavior(),block:'center',inline:'nearest'}));
  }}
+ if(from==='list'&&matchMedia('(max-width:800px)').matches&&!document.body.classList.contains('map-expanded')){
+   // Mobile page scrolls vertically: show the enlarged map after list selection.
+   requestAnimationFrame(()=>document.querySelector('.map-card').scrollIntoView({behavior:scrollBehavior(),block:'start'}));
+ }
 }
 function zoomBy(factor,pt){const anchor=pt||[vb.x+vb.w/2,vb.y+vb.h/2],w=Math.max(42,Math.min(1200,vb.w*factor)),ratio=w/vb.w;setView(anchor[0]-(anchor[0]-vb.x)*ratio,anchor[1]-(anchor[1]-vb.y)*ratio,w)}
 function svgPos(e){let p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;let ctm=svg.getScreenCTM();if(!ctm)return [vb.x+vb.w/2,vb.y+vb.h/2];p=p.matrixTransform(ctm.inverse());return [p.x,p.y]}
@@ -182,9 +251,24 @@ svg.addEventListener('dblclick',e=>{e.preventDefault();zoomBy(.65,svgPos(e))});
 document.getElementById('zoomIn').onclick=()=>zoomBy(.7);
 document.getElementById('zoomOut').onclick=()=>zoomBy(1.42);
 document.getElementById('resetMap').onclick=()=>setView(0,0,1200);
+function scrollBehavior(){return 'instant'}
+function setMapExpanded(on){
+ document.body.classList.toggle('map-expanded',on);
+ expandMapButton.setAttribute('aria-pressed',on?'true':'false');
+ expandMapButton.textContent=on?'✕ 閉じる':'⛶ 拡大';
+ expandMapButton.title=on?'通常表示に戻る':'地図を大きく表示';
+ if(!on)hoverLabel.style.display='none';
+}
+expandMapButton.addEventListener('click',()=>setMapExpanded(!document.body.classList.contains('map-expanded')));
+jumpToListButton.addEventListener('click',()=>{
+ if(!selected)return;
+ setMapExpanded(false);
+ requestAnimationFrame(()=>countryRows.get(selected)?.scrollIntoView({behavior:scrollBehavior(),block:'center',inline:'nearest'}));
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('map-expanded'))setMapExpanded(false)});
 search.addEventListener('input',e=>{query=e.target.value;renderList();list.scrollTop=0});
 draw();renderFilters();renderList();setView(0,0,1200);
-if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+window.addEventListener('resize',updateMarkerSizes);
 </script>
 </body>
 </html>
