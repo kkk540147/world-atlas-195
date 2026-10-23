@@ -29,88 +29,103 @@ button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus
 @media(max-width:800px) and (max-height:670px){.layout{grid-template-rows:43% 57%}.map-help{display:none}.infobox{min-height:65px}.info-description{-webkit-line-clamp:1}.brand p{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
-/* v2: readable country details, large touch map and full-screen map mode. */
-.row-desc{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.55;font-size:11.5px;color:#afc2d1;overflow-wrap:anywhere}
+/* v3 fixed split layout: map and list share the available screen. */
+html,body{width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+.app{height:100vh;height:100dvh;min-height:0;overflow:hidden}
+.sitehead{height:58px;min-height:0;flex:0 0 58px;padding:8px 15px}
+.layout{display:grid;flex:1;min-height:0;overflow:hidden;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:10px;padding:10px}
+.map-column{height:100%;min-height:0;min-width:0;display:flex;flex-direction:column;gap:0}
+.map-card{width:100%;height:100%;flex:1 1 auto;min-height:0;overflow:hidden}
+#mapViewport{flex:1;min-height:0;overflow:hidden}
+.infobox{display:none!important}
+.sidebar{width:100%;height:100%;min-height:0;min-width:0;overflow:hidden;display:flex;flex-direction:column}
+.side-top{flex:0 0 auto}
+#countryList{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scroll-behavior:auto}
+.row-desc{display:block;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.55;font-size:11.5px;color:#afc2d1;overflow-wrap:anywhere}
 .row-title{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.4}
-.country-row{align-items:flex-start}
+.country-row{align-items:flex-start;min-height:50px}
 .row-arrow{align-self:center}
-.info-description{overflow:visible;text-overflow:clip;white-space:normal;overflow-wrap:anywhere}
-.ctrl.fullscreen{font-size:11px;min-width:76px;padding:0 8px;font-weight:700;letter-spacing:0}
-#jumpToList{display:none;margin-left:auto;border:1px solid #447c70;background:#174e48;color:#adfce1;border-radius:8px;padding:7px 10px;font-weight:700;font-size:12px}
-.map-expanded{overflow:hidden!important}
-.map-expanded .map-column{position:fixed;inset:0;z-index:100;background:var(--bg);padding:max(env(safe-area-inset-top),8px) max(env(safe-area-inset-right),8px) max(env(safe-area-inset-bottom),8px) max(env(safe-area-inset-left),8px);display:flex;gap:8px;min-height:0;width:auto;max-height:100dvh}
-.map-expanded .map-card{flex:1!important;height:auto!important;min-height:0!important}
-.map-expanded .infobox{flex-shrink:0;min-height:0;max-height:35dvh;overflow-y:auto;overscroll-behavior:contain}
-.map-expanded #jumpToList{display:inline-flex}
-.map-expanded .map-help{display:none}
-.map-expanded .mapbar{flex-shrink:0}
-.map-expanded #mapViewport{min-height:0}
-@media(max-width:800px){
- body{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
- .app{height:auto;min-height:100dvh;overflow:visible}
- .sitehead{height:auto;min-height:61px}
- .layout{display:flex;flex-direction:column;grid-template-columns:none;grid-template-rows:none;gap:10px;padding:10px;min-height:0;flex:initial}
- .map-column{height:auto;min-height:0;flex:none;gap:9px}
- .map-card{height:clamp(400px,56dvh,640px);flex:none;min-height:0}
- .mapbar{min-height:48px;padding:6px 9px}
- .map-title{font-size:14px}
- .ctrl{height:34px;min-width:34px;padding:0 8px}
- .ctrl.reset{min-width:64px}
- .ctrl.fullscreen{min-width:76px;font-size:11px}
- .map-help{font-size:10px;padding:6px 8px;left:8px;bottom:8px}
- .infobox{height:auto;min-height:0;flex:none;padding:12px 14px;gap:7px}
- .info-top{min-height:20px}
- .eyebrow{font-size:11px}
- .info-title{font-size:21px}
- .info-description{font-size:13px;line-height:1.65;display:block;-webkit-line-clamp:unset;-webkit-box-orient:initial;overflow:visible;white-space:normal}
- .info-hint{display:block;font-size:10px;line-height:1.5}
- .sidebar{height:clamp(430px,65dvh,700px);flex:none;min-height:0;overflow:hidden}
- #countryList{flex:1;overflow-y:auto;min-height:0;padding:7px 9px 20px}
- .side-top{padding:12px 11px 11px}
- .side-heading h2{font-size:15px}
- .searchbox{height:42px}
- .row-desc{font-size:12px;line-height:1.5;margin-top:4px;white-space:normal;overflow:visible;text-overflow:clip}
- .country-row{padding:11px 9px;margin:3px 0 7px;gap:11px}
- .row-title{font-size:14px}
- .row-num{font-size:12px;padding-top:1px}
- .region-title{font-size:13px;padding:9px 10px}
- .map-card{scroll-margin-top:8px}
- .map-expanded .map-column{height:100dvh}
- .map-expanded .map-card{height:auto}
- .map-expanded .infobox{padding:12px 14px;max-height:40dvh}
-}
-@media(max-width:800px) and (max-height:670px){
- .info-description{display:block;-webkit-line-clamp:unset;overflow:visible}
- .map-card{height:max(300px,55dvh)}
- .map-expanded .map-card{height:auto}
-}
-@media(max-width:370px){.head-stat{font-size:9px;padding:5px 6px}.ctrl{padding:0 5px;min-width:30px}.ctrl.reset{min-width:58px}.ctrl.fullscreen{min-width:67px}.mapbar{padding:6px}}
-
-/* v2.1: unmistakable version confirmation and discoverable full-screen control. */
+.ctrl.fullscreen{font-size:11px;min-width:76px;padding:0 8px;font-weight:700;color:#bffff0;border:1px solid #66cbaa;background:#1a4f49}
+.ctrl.fullscreen:hover{background:#2e766a}
 .version-stamp{display:inline-block;font-size:10px;font-weight:700;line-height:1;letter-spacing:.03em;color:#102f28;background:#75ebc6;padding:4px 6px;border-radius:5px;vertical-align:middle;margin-left:5px}
-.ctrl.fullscreen{color:#bffff0!important;border:1px solid #66cbaa!important;background:#1a4f49!important}
-.ctrl.fullscreen:hover{background:#2e766a!important}
-@media(max-width:800px){.map-title{white-space:nowrap}.version-stamp{font-size:9px;padding:3px 4px}.ctrl.fullscreen{min-width:72px;font-size:11px}}
-@media(max-width:355px){.ctrl.fullscreen{min-width:64px;padding:0 4px;font-size:10px}.ctrl.reset{min-width:52px}.mapbar{padding:5px 6px}}
+/* Optional fullscreen mode does not affect the default 50/50 split. */
+.map-expanded .map-column{position:fixed;inset:0;z-index:1000;background:var(--bg);width:100%;height:100dvh;max-height:100dvh;padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+.map-expanded .map-card{height:100%;min-height:0;flex:1}
+.map-expanded .map-help{display:none}
+@media(max-width:800px){
+ .sitehead{height:49px;flex:0 0 49px;padding:6px 9px}
+ .brand-icon{width:34px;height:34px;border-radius:9px;font-size:19px}
+ .brand{gap:8px}
+ .brand h1{font-size:14px;white-space:nowrap}
+ .brand p{font-size:9px;margin-top:2px}
+ .head-stat{padding:5px 7px;font-size:9px;white-space:nowrap}
+ .layout{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:6px;padding:6px}
+ .map-column,.sidebar{height:100%;min-height:0}
+ .mapbar{min-height:40px;height:40px;padding:5px 8px}
+ .map-title{font-size:12px;white-space:nowrap}
+ .map-subtitle{display:none}
+ .controls{gap:5px}
+ .ctrl{height:29px;min-width:29px;padding:0 6px;font-size:17px}
+ .ctrl.reset{min-width:57px;font-size:10px}
+ .ctrl.fullscreen{min-width:69px;font-size:10px;padding:0 5px}
+ .version-stamp{font-size:9px;padding:3px 4px;margin-left:2px}
+ .map-help{font-size:9px;bottom:5px;left:5px;padding:4px 6px;max-width:90%;white-space:nowrap}
+ .sidebar{border-radius:12px}
+ .side-top{padding:7px 9px 6px}
+ .side-heading{margin-bottom:6px}
+ .side-heading h2{font-size:13px}
+ .count{font-size:11px}
+ .searchbox{height:33px;padding:0 9px}
+ .searchbox input{font-size:12px}
+ .filters{margin-top:6px;gap:5px;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:2px;scrollbar-width:none}
+ .filters::-webkit-scrollbar{display:none}
+ .filter{font-size:10px;flex-shrink:0;padding:4px 8px;min-height:27px}
+ #countryList{padding:3px 7px 12px}
+ .region-title{font-size:11px;padding:6px 8px;margin:4px 0 5px}
+ .country-row{margin:2px 0 3px;padding:8px 7px;gap:9px;min-height:53px}
+ .row-title{font-size:13px}
+ .row-desc{font-size:11px;line-height:1.5;margin-top:3px}
+ .row-num{font-size:11px;padding-top:2px;width:23px}
+ .footer-note{display:none}
+}
+@media(max-width:380px){
+ .head-stat{font-size:8px;padding:5px}
+ .brand h1{font-size:13px}
+ .controls{gap:3px}
+ .ctrl{min-width:27px;padding:0 5px}
+ .ctrl.reset{min-width:50px;font-size:9px}
+ .ctrl.fullscreen{min-width:61px;font-size:9px;padding:0 3px}
+ .mapbar{padding:4px 5px}
+}
+@media(max-width:800px) and (max-height:680px){
+ .sitehead{height:42px;flex-basis:42px}
+ .brand p{display:none}
+ .brand-icon{width:29px;height:29px;font-size:17px}
+ .side-top{padding:5px 7px 4px}
+ .mapbar{height:36px;min-height:36px}
+ .searchbox{height:29px}
+ .filters{margin-top:4px}
+ .filter{min-height:24px;padding:3px 7px}
+}
 </style>
 </head>
 <body>
 <main class="app">
   <header class="sitehead">
-    <div class="brand"><div class="brand-icon" aria-hidden="true">🌐</div><div><h1>世界195か国 地図帳</h1><p>タップで探す・地図で位置を知る</p></div></div>
+    <div class="brand"><div class="brand-icon" aria-hidden="true">🌐</div><div><h1>世界195か国 地図帳</h1><p>地図とリストが同時に見える</p></div></div>
     <span class="head-stat">193加盟国 ＋ 2オブザーバー</span>
   </header>
   <div class="layout">
-    <section class="map-column" aria-label="世界地図と国の説明">
+    <section class="map-column" aria-label="世界地図">
       <div class="map-card">
-        <div class="mapbar"><div><div class="map-title">世界地図 <span class="version-stamp">v2.1</span></div><div class="map-subtitle">国をクリック・タップして、右のリストに移動</div></div>
+        <div class="mapbar"><div><div class="map-title">世界地図 <span class="version-stamp">v3</span></div><div class="map-subtitle">国をタップすると一覧の該当箇所へ</div></div>
           <div class="controls"><button class="ctrl" id="zoomIn" aria-label="地図を拡大" title="拡大">＋</button><button class="ctrl" id="zoomOut" aria-label="地図を縮小" title="縮小">−</button><button class="ctrl reset" id="resetMap" title="世界全体に戻る">全体表示</button><button class="ctrl fullscreen" id="expandMap" type="button" aria-pressed="false" title="地図を全画面で操作">⛶ 全画面</button></div>
         </div>
         <div id="mapViewport"><svg id="worldMap" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="国を選択できる世界地図" preserveAspectRatio="xMidYMid meet"><g id="graticule"></g><g id="countryShapes"></g><g id="countryMarkers"></g></svg>
-           <div id="hoverLabel" class="hover"></div><div class="map-help"><span class="legend-dot"></span>小さな国は●で表示　<span class="legend-dot legend-selected"></span>選択中 <span class="desktop-help">｜ ドラッグで移動・ホイールで拡大</span></div>
+           <div id="hoverLabel" class="hover"></div><div class="map-help"><span class="legend-dot"></span>小国 <span class="legend-dot legend-selected"></span>選択中</div>
         </div>
       </div>
-      <section class="infobox" aria-live="polite"><div class="info-top"><span class="eyebrow" id="infoRegion">国を選択してください</span><button id="jumpToList" type="button" disabled>一覧へ ↓</button></div><h2 class="info-title" id="infoName">地図と国名リストが連動します</h2><p class="info-description" id="infoDesc">リストを押すと該当国を拡大表示。地図の国や黄色の丸を押すと、リストの該当行に移動します。</p><p class="info-hint" id="infoHint">※ 小さな国は位置マーカーで表示。国境線は学習用の概略図です（係争地域は簡略表示）。</p></section>
+
     </section>
     <aside class="sidebar" aria-label="195か国一覧"><div class="side-top"><div class="side-heading"><h2>国名・特徴から探す</h2><span id="matchCount" class="count">195 / 195か国</span></div>
       <label class="searchbox"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#91a9bb" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span class="sr-only">国名や特徴を検索</span><input type="search" id="search" placeholder="日本、ヨーロッパ、砂漠、JPN など" autocomplete="off"/></label>
@@ -139,7 +154,7 @@ const list=document.getElementById('countryList'), search=document.getElementByI
 const htmlSafe=s=>String(s).replace(/[&<>"']/g,t=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[t]));
 const regions=['すべて','アジア','ヨーロッパ','アフリカ','南北アメリカ','オセアニア'];
 let activeRegion='すべて',selected=null,query='',lastMoved=0,hoverTimer=0;
-const expandMapButton=document.getElementById('expandMap'),jumpToListButton=document.getElementById('jumpToList');
+const expandMapButton=document.getElementById('expandMap');
 const shapesByCode=new Map(),markersByCode=new Map(),markerCoords=new Map(),countryRows=new Map();
 const vb={x:0,y:0,w:1200,h:560};
 const geoToMap=([lon,lat])=>[(lon+180)/360*1200,(84-lat)/168*560];
@@ -202,31 +217,30 @@ function focusCountry(c){
  // Selected target is slightly above center to leave room for map legends.
  setView(cx-width/2,cy-width*560/1200/2,width);
 }
+function scrollSelectedRowIntoList(row){
+ // Scroll *only the list pane*, never the document or the map pane.
+ if(!row)return;
+ const listRect=list.getBoundingClientRect(), rowRect=row.getBoundingClientRect();
+ const target=list.scrollTop+(rowRect.top-listRect.top)-(list.clientHeight-rowRect.height)/2;
+ list.scrollTop=Math.max(0,target);
+}
 function selectCountry(iso,from){
  const c=byIso.get(iso);if(!c)return;
  if(selected){for(const n of (shapesByCode.get(selected)||[]))n.classList.remove('selected');markersByCode.get(selected)?.classList.remove('selected');countryRows.get(selected)?.classList.remove('is-active')}
- selected=iso;for(const n of (shapesByCode.get(iso)||[]))n.classList.add('selected');markersByCode.get(iso)?.classList.add('selected');
- document.getElementById('infoRegion').textContent=`No.${c.id} ／ ${c.region}`;
- document.getElementById('infoName').textContent=c.name;
- document.getElementById('infoDesc').textContent=c.desc;
- jumpToListButton.disabled=false;
- document.getElementById('infoHint').textContent=c.marker?'● 黄色い位置マーカーがある国です。正確な国境の細部は省略しています。':'地図上の緑色の部分が選択した国です。';
+ selected=iso;
+ for(const n of (shapesByCode.get(iso)||[]))n.classList.add('selected');
+ markersByCode.get(iso)?.classList.add('selected');
  focusCountry(c);
  if(from==='map'){
-  // Clear filters if they hide the tapped country's entry.
+  // If the chosen country is hidden by a filter, expose it first.
   if((activeRegion!=='すべて'&&activeRegion!==c.region)||(query&&!normal(c.name+c.iso+c.region+c.desc).includes(normal(query)))){
    activeRegion='すべて';search.value='';query='';renderFilters();renderList();
   }
+  // In optional full-screen mode, a tap returns to the persistent split layout.
+  if(document.body.classList.contains('map-expanded'))setMapExpanded(false);
  }
  const row=countryRows.get(iso);
- if(row){row.classList.add('is-active');if(from==='map'&&!document.body.classList.contains('map-expanded')){
-   // Normal mode: jump from the map to the corresponding list item.
-   requestAnimationFrame(()=>row.scrollIntoView({behavior:scrollBehavior(),block:'center',inline:'nearest'}));
- }}
- if(from==='list'&&matchMedia('(max-width:800px)').matches&&!document.body.classList.contains('map-expanded')){
-   // Mobile page scrolls vertically: show the enlarged map after list selection.
-   requestAnimationFrame(()=>document.querySelector('.map-card').scrollIntoView({behavior:scrollBehavior(),block:'start'}));
- }
+ if(row){row.classList.add('is-active');if(from==='map')requestAnimationFrame(()=>scrollSelectedRowIntoList(row));}
 }
 function zoomBy(factor,pt){const anchor=pt||[vb.x+vb.w/2,vb.y+vb.h/2],w=Math.max(42,Math.min(1200,vb.w*factor)),ratio=w/vb.w;setView(anchor[0]-(anchor[0]-vb.x)*ratio,anchor[1]-(anchor[1]-vb.y)*ratio,w)}
 function svgPos(e){let p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;let ctm=svg.getScreenCTM();if(!ctm)return [vb.x+vb.w/2,vb.y+vb.h/2];p=p.matrixTransform(ctm.inverse());return [p.x,p.y]}
@@ -234,7 +248,7 @@ function showHover(e,name){if(!name||matchMedia('(hover:none)').matches){hoverLa
 function mapIsoFromTarget(t){const hit=t.closest?.('[data-iso]');return hit?.dataset.iso}
 svg.addEventListener('pointermove',e=>{const iso=mapIsoFromTarget(e.target);showHover(e,byIso.get(iso)?.name||e.target.closest?.('[data-other]')?.dataset.other)});
 svg.addEventListener('pointerleave',()=>hoverLabel.style.display='none');
-function showOther(name){document.getElementById('infoRegion').textContent='195か国の対象外';document.getElementById('infoName').textContent=name;document.getElementById('infoDesc').textContent='この地域は195か国の一覧には含めていません。国・地域の数え方には複数の考え方があります。';}
+function showOther(name){hoverLabel.style.display='none'; /* Outside the 195-country list. */}
 svg.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const hit=e.target.closest?.('[data-iso]');if(!hit)return;e.preventDefault();selectCountry(hit.dataset.iso,'map')});
 const pointers=new Map();let gestureDistance=0,pointerStart=null,pressedIso=null,pressedOther=null,isDragging=false,pinchStarted=false;
 svg.addEventListener('pointerdown',e=>{
@@ -274,11 +288,6 @@ function setMapExpanded(on){
  if(!on)hoverLabel.style.display='none';
 }
 expandMapButton.addEventListener('click',()=>setMapExpanded(!document.body.classList.contains('map-expanded')));
-jumpToListButton.addEventListener('click',()=>{
- if(!selected)return;
- setMapExpanded(false);
- requestAnimationFrame(()=>countryRows.get(selected)?.scrollIntoView({behavior:scrollBehavior(),block:'center',inline:'nearest'}));
-});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('map-expanded'))setMapExpanded(false)});
 search.addEventListener('input',e=>{query=e.target.value;renderList();list.scrollTop=0});
 draw();renderFilters();renderList();setView(0,0,1200);
